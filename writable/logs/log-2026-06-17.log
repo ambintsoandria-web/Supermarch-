@@ -492,6 +492,7 @@ in SYSTEMPATH/Exceptions/FrameworkException.php on line 39.
  8 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
  9 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb()
 10 SYSTEMPATH/rewrite.php(44): require_once('/home/main/Documents/GitHub/Supermarch-/public/index.php')
+<<<<<<< HEAD
 CRITICAL - 2026-06-17 06:50:31 --> Error: Class "App\Controllers\CaisseModel" not found
 [Method: GET, Route: saisie-achat]
 in APPPATH/Controllers/CaisseController.php on line 45.
@@ -512,3 +513,31 @@ in APPPATH/Controllers/CaisseController.php on line 45.
  5 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
  6 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb()
  7 SYSTEMPATH/rewrite.php(44): require_once('/home/main/Documents/GitHub/Supermarch-/public/index.php')
+=======
+CRITICAL - 2026-06-17 06:45:18 --> CodeIgniter\View\Exceptions\ViewException: Invalid file: "saisie_achat.php"
+[Method: GET, Route: saisie-achat]
+in SYSTEMPATH/Exceptions/FrameworkException.php on line 39.
+ 1 SYSTEMPATH/View/View.php(228): CodeIgniter\Exceptions\FrameworkException::forInvalidFile()
+ 2 SYSTEMPATH/Common.php(1254): CodeIgniter\View\View->render()
+ 3 APPPATH/Controllers/CaisseController.php(48): view()
+ 4 SYSTEMPATH/CodeIgniter.php(974): App\Controllers\CaisseController->saisieAchat()
+ 5 SYSTEMPATH/CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController()
+ 6 SYSTEMPATH/CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest()
+ 7 SYSTEMPATH/Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+ 9 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb()
+10 SYSTEMPATH/rewrite.php(44): require_once('/home/itu/Documents/SI/Supermarch-/public/index.php')
+CRITICAL - 2026-06-17 06:47:39 --> CodeIgniter\View\Exceptions\ViewException: Invalid file: "saisie_achat.php"
+[Method: GET, Route: saisie-achat]
+in SYSTEMPATH/Exceptions/FrameworkException.php on line 39.
+ 1 SYSTEMPATH/View/View.php(228): CodeIgniter\Exceptions\FrameworkException::forInvalidFile()
+ 2 SYSTEMPATH/Common.php(1254): CodeIgniter\View\View->render()
+ 3 APPPATH/Controllers/CaisseController.php(48): view()
+ 4 SYSTEMPATH/CodeIgniter.php(974): App\Controllers\CaisseController->saisieAchat()
+ 5 SYSTEMPATH/CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController()
+ 6 SYSTEMPATH/CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest()
+ 7 SYSTEMPATH/Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+ 9 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb()
+10 SYSTEMPATH/rewrite.php(44): require_once('/home/itu/Documents/SI/Supermarch-/public/index.php')
+>>>>>>> d636a242e19c3dfa42e155b38bc2a7769a3ebcc7
