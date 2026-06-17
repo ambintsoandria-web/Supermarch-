@@ -5,12 +5,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="assets/css/choix_caisse.css">
+    <link rel="stylesheet" href="/assets/css/sidebar.css">
+
     <title>Choix de la Caisse</title>
     <style>
     </style>
 </head>
 
 <body>
+    <?= view('sidebar') ?>
+
+
     <div class="container">
         <h1>🏪 Supermarché</h1>
         <p class="sous-titre">Choisissez votre caisse</p>
