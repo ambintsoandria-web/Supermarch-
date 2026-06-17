@@ -8,16 +8,17 @@ class AchatModel extends Model
 {
     protected $table = 'achats';
     protected $primaryKey = 'id_achat';
-    protected $allowedFields = ['id_caisse', 'total', 'statut'];
+    protected $allowedFields = ['id_caisse', 'id_user', 'total', 'statut']; // ← AJOUTER id_user
     protected $useTimestamps = false;
     protected $returnType = 'object';
 
-    public function creerAchat($id_caisse)
+    public function creerAchat($id_caisse, $id_user) // ← AJOUTER id_user en paramètre
     {
         $data = [
             'id_caisse' => $id_caisse,
+            'id_user' => $id_user,  // ← INSÉRER L'UTILISATEUR
             'total' => 0,
-            'statut' => 'en_cours'
+            'statut' => 'cloture'   // ← DIRECTEMENT CLOTURE
         ];
         $this->insert($data);
         return $this->getInsertID();
@@ -55,13 +56,13 @@ class AchatModel extends Model
         $this->update($id_achat, ['statut' => 'cloture']);
         $achat = $this->find($id_achat);
         if ($achat) {
-            return $this->creerAchat($achat->id_caisse);
+            return $this->creerAchat($achat->id_caisse, $achat->id_user);
         }
         return false;
     }
 
     // ============================================
-    // NOUVELLE METHODE POUR L'HISTORIQUE
+    // HISTORIQUE
     // ============================================
     public function getAllAchats($id_caisse)
     {

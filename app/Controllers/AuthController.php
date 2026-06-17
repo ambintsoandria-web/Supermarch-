@@ -35,7 +35,7 @@ class AuthController extends BaseController
                 'isLoggedIn' => true
             ]);
 
-            return redirect()->to('/choix-caisse')->with('success', 'Bienvenue ' . $user->nom_complet . ' !');
+            return redirect()->to('/')->with('success', 'Bienvenue ' . $user->nom_complet . ' !');
         } else {
             return redirect()->back()->with('error', 'Login ou mot de passe incorrect');
         }
