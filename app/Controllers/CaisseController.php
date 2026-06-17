@@ -2,9 +2,11 @@
 
 namespace App\Controllers;
 
+
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
+use App\Models\ProduitModel;
 use App\Models\CaisseModel;
 
 class CaisseController extends BaseController
@@ -43,8 +45,9 @@ class CaisseController extends BaseController
         }
 
         $caisseModel = new CaisseModel();
-        $data['caisse'] = $caisseModel->getById($id_caisse); // Méthode du modèle
-
+        $data['caisse'] = $caisseModel->getById($id_caisse);
+        $produitModel = new ProduitModel();
+        $data['produits'] = $produitModel->findAll();
         return view('saisie_achat', $data);
     }
 }

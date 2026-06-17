@@ -51,7 +51,7 @@
                                 <option value="<?= $produit->id_produit ?>">
                                     <?= $produit->designation ?>
                                     (
-                                    <?= number_format($produit->prix_vente, 0, ',', ' ') ?> FCFA)
+                                    <?=  number_format($produit->prix_vente, 2, ',', ' ') ?> AR)
                                     - Stock:
                                     <?= $produit->stock ?>
                                 </option>

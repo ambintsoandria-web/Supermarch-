@@ -11,4 +11,5 @@ class ProduitModel extends Model
     protected $allowedFields = ['designation', 'prix_vente', 'stock', 'code_barre', 'categorie'];
     protected $useTimestamps = false;
     protected $returnType = 'object';
+    
 }
