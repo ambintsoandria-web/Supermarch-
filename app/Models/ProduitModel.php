@@ -4,12 +4,12 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class ArticleModel extends Model
+class ProduitModel extends Model
 {
-    protected $table         = 'articles';
+    protected $table         = 'produits';
     protected $primaryKey    = 'id';
     protected $returnType    = 'array';
     protected $useTimestamps = true;
 
-    protected $allowedFields = ['titre', 'contenu', 'utilisateur_id'];
+    protected $allowedFields = ['designation', 'prix', 'stock'];
 }
