@@ -131,6 +131,10 @@ class CaisseController extends BaseController
             return redirect()->to('/choix-caisse')->with('error', 'Veuillez d\'abord choisir une caisse');
         }
 
+        if (!$id_user) {
+            return redirect()->to('/')->with('error', 'Veuillez vous connecter');
+        }
+
         $panier = session()->get('panier') ?? [];
 
         if (empty($panier)) {
@@ -141,13 +145,8 @@ class CaisseController extends BaseController
         $ligneModel = new LigneAchatModel();
         $produitModel = new ProduitModel();
 
-        // Créer l'achat avec l'id_user
-        $id_achat = $achatModel->insert([
-            'id_caisse' => $id_caisse,
-            'id_user' => $id_user,  // ← AJOUTER L'UTILISATEUR
-            'total' => 0,
-            'statut' => 'cloture'
-        ]);
+        // Créer l'achat avec l'utilisateur
+        $id_achat = $achatModel->creerAchat($id_caisse, $id_user);  // ← PASSER id_user
 
         $total = 0;
         foreach ($panier as $item) {
