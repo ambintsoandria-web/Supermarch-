@@ -71,4 +71,10 @@ class AchatModel extends Model
             ->orderBy('date_achat', 'DESC')
             ->findAll();
     }
+    public function statistique($date){
+        return $this->select('SUM(total) as total_ventes, COUNT(*) as nombre_achats')
+            ->where('DATE(date_achat)', $date)
+            ->where('statut', 'cloture')
+            ->first();
+    }
 }
