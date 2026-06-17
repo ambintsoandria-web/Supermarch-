@@ -505,3 +505,16 @@ in SYSTEMPATH/Exceptions/FrameworkException.php on line 39.
  8 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
  9 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb()
 10 SYSTEMPATH/rewrite.php(44): require_once('/home/itu/Documents/SI/Supermarch-/public/index.php')
+CRITICAL - 2026-06-17 06:47:39 --> CodeIgniter\View\Exceptions\ViewException: Invalid file: "saisie_achat.php"
+[Method: GET, Route: saisie-achat]
+in SYSTEMPATH/Exceptions/FrameworkException.php on line 39.
+ 1 SYSTEMPATH/View/View.php(228): CodeIgniter\Exceptions\FrameworkException::forInvalidFile()
+ 2 SYSTEMPATH/Common.php(1254): CodeIgniter\View\View->render()
+ 3 APPPATH/Controllers/CaisseController.php(48): view()
+ 4 SYSTEMPATH/CodeIgniter.php(974): App\Controllers\CaisseController->saisieAchat()
+ 5 SYSTEMPATH/CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController()
+ 6 SYSTEMPATH/CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest()
+ 7 SYSTEMPATH/Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+ 9 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb()
+10 SYSTEMPATH/rewrite.php(44): require_once('/home/itu/Documents/SI/Supermarch-/public/index.php')
