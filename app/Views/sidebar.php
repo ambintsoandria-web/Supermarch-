@@ -8,12 +8,22 @@
         <div class="subtitle">CAISSE EN LIGNE</div>
     </div>
 
-    <!-- Informations utilisateur -->
+    <!-- Informations utilisateur - DYNAMIQUE -->
     <div class="user-info">
-        <div class="avatar">JD</div>
+        <div class="avatar">
+            <?php
+            $nom = session()->get('nom_complet') ?? 'Utilisateur';
+            $initiales = '';
+            $mots = explode(' ', $nom);
+            foreach ($mots as $mot) {
+                $initiales .= strtoupper(substr($mot, 0, 1));
+            }
+            echo $initiales ?: 'U';
+            ?>
+        </div>
         <div class="user-details">
-            <div class="name">Jean Dupont</div>
-            <div class="role">👤 Caissier</div>
+            <div class="name"><?= session()->get('nom_complet') ?? 'Utilisateur' ?></div>
+            <div class="role">👤 <?= ucfirst(session()->get('role') ?? 'Caissier') ?></div>
         </div>
     </div>
 
@@ -22,7 +32,8 @@
         <div class="nav-section">Menu Principal</div>
         <ul>
             <li>
-                <a href="<?= base_url('/') ?>" class="<?= current_url() == base_url('/') ? 'active' : '' ?>">
+                <a href="<?= base_url('/choix-caisse') ?>"
+                    class="<?= current_url() == base_url('/choix-caisse') ? 'active' : '' ?>">
                     <span class="icon">🏠</span>
                     <span>Accueil</span>
                 </a>
@@ -81,7 +92,7 @@
 
     <!-- Footer -->
     <div class="sidebar-footer">
-        <a href="<?= base_url('/logout') ?>" class="logout-btn">
+        <a href="<?= base_url('/auth/logout') ?>" class="logout-btn">
             <span class="icon">🚪</span>
             <span>Déconnexion</span>
         </a>
