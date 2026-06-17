@@ -10,12 +10,12 @@ class Articles extends BaseController
     public function index()
     {
         $articleModel = new ArticleModel();
-        $userModel    = new UserModel();
+        $userModel = new UserModel();
 
         $articles = $articleModel->findAll();
 
         foreach ($articles as &$a) {
-            $auteur      = $userModel->find($a['utilisateur_id']);
+            $auteur = $userModel->find($a['utilisateur_id']);
             $a['auteur'] = $auteur['nom'] ?? 'Inconnu';
         }
         unset($a);
@@ -32,7 +32,7 @@ class Articles extends BaseController
     {
         $articleModel = new ArticleModel();
 
-        $data                   = $this->request->getPost();
+        $data = $this->request->getPost();
         $data['utilisateur_id'] = session()->get('user_id') ?? 1;
 
         $articleModel->insert($data);

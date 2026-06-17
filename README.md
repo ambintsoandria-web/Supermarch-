@@ -1,61 +1,72 @@
-# CodeIgniter 4 Framework
+# Mini-blog CodeIgniter 4 + SQLite — Projet à auditer
 
-## What is CodeIgniter?
+Ce mini-projet (gestion d'utilisateurs et d'articles) a été **généré par une IA**
+à partir d'une consigne courte. Il **fonctionne** : on peut s'inscrire, se
+connecter, créer et supprimer des articles, et accéder à un espace admin.
 
-CodeIgniter is a PHP full-stack web framework that is light, fast, flexible and secure.
-More information can be found at the [official site](https://codeigniter.com).
+Votre mission n'est **pas** de le développer, mais de le **relire en professionnel** :
+trouver ce qui ne va pas, et le corriger. Voir `GRILLE-AUDIT-etudiant.md`.
 
-This repository holds the distributable version of the framework.
-It has been built from the
-[development repository](https://github.com/codeigniter4/CodeIgniter4).
+---
 
-More information about the plans for version 4 can be found in [CodeIgniter 4](https://forum.codeigniter.com/forumdisplay.php?fid=28) on the forums.
+## Pré-requis
 
-You can read the [user guide](https://codeigniter.com/user_guide/)
-corresponding to the latest version of the framework.
+- PHP 8.1+
+- Composer
+- L'extension `php-sqlite3` activée
 
-## Important Change with index.php
+## Installation
 
-`index.php` is no longer in the root of the project! It has been moved inside the *public* folder,
-for better security and separation of components.
+Ces fichiers sont les fichiers **applicatifs** : ils se déposent dans une
+installation neuve de CodeIgniter 4.
 
-This means that you should configure your web server to "point" to your project's *public* folder, and
-not to the project root. A better practice would be to configure a virtual host to point there. A poor practice would be to point your web server to the project root and expect to enter *public/...*, as the rest of your logic and the
-framework are exposed.
+```bash
+# 1. Intégrer ce fichier dans 1 repertoire CI4
+cd blog-audit
 
-**Please** read the user guide for a better explanation of how CI4 works!
+# 2. Copier le contenu du dossier app/ fourni ICI par-dessus le app/ du projet
+#    (Config/Database.php, Config/Routes.php, Config/Filters.php,
+#     Controllers/, Models/, Database/, Views/)
 
-## Repository Management
+# 3. Créer le dossier de la base SQLite
+mkdir -p writable/db
 
-We use GitHub issues, in our main repository, to track **BUGS** and to track approved **DEVELOPMENT** work packages.
-We use our [forum](http://forum.codeigniter.com) to provide SUPPORT and to discuss
-FEATURE REQUESTS.
+# 4. Créer les tables et les données de démonstration
+php spark migrate
+php spark db:seed DemoSeeder
 
-This repository is a "distribution" one, built by our release preparation script.
-Problems with it can be raised on our forum, or as issues in the main repository.
+# 5. Lancer le serveur
+php spark serve
+```
 
-## Contributing
+Ouvrir ensuite http://localhost:8080
 
-We welcome contributions from the community.
+## Comptes de démonstration
 
-Please read the [*Contributing to CodeIgniter*](https://github.com/codeigniter4/CodeIgniter4/blob/develop/CONTRIBUTING.md) section in the development repository.
+| Email           | Mot de passe | Rôle   |
+|-----------------|--------------|--------|
+| rojo@itu.mg     | secret123    | admin  |
+| sitraka@itu.mg  | azerty       | membre |
 
-## Server Requirements
+## Règle du jeu
 
-PHP version 8.2 or higher is required, with the following extensions installed:
+1. Lancez l'application, naviguez, constatez : **ça marche**.
+2. Ouvrez le code et auditez-le (grille fournie).
+3. Pour chaque problème : où ? pourquoi c'est un problème ? comment le démontrer ?
+   comment le corriger ?
 
-- [intl](http://php.net/manual/en/intl.requirements.php)
-- [mbstring](http://php.net/manual/en/mbstring.installation.php)
+> Indice de méthode : si vous deviez mettre cette application **en production
+> demain**, qu'est-ce qui vous empêcherait de dormir ?
 
-> [!WARNING]
-> - The end of life date for PHP 7.4 was November 28, 2022.
-> - The end of life date for PHP 8.0 was November 26, 2023.
-> - The end of life date for PHP 8.1 was December 31, 2025.
-> - If you are still using below PHP 8.2, you should upgrade immediately.
-> - The end of life date for PHP 8.2 will be December 31, 2026.
 
-Additionally, make sure that the following extensions are enabled in your PHP:
 
-- json (enabled by default - don't turn it off)
-- [mysqlnd](http://php.net/manual/en/mysqlnd.install.php) if you plan to use MySQL
-- [libcurl](http://php.net/manual/en/curl.requirements.php) if you plan to use the HTTP\CURLRequest library
+
+
+
+Audit : 
+P A I R E
+Présentation
+Appartenance
+Irrégularité
+Réalisme
+Existence

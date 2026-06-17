@@ -9,7 +9,7 @@ class Admin extends BaseController
     public function dashboard()
     {
         $userModel = new UserModel();
-        $users     = $userModel->findAll();
+        $users = $userModel->findAll();
 
         return view('admin/dashboard', ['users' => $users]);
     }

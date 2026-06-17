@@ -3,6 +3,9 @@
 namespace App\Controllers;
 
 use App\Models\UserModel;
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
 
 class Auth extends BaseController
 {
@@ -18,30 +21,50 @@ class Auth extends BaseController
         return view('auth/register');
     }
 
+    // public function login()
+    // {
+    //     if ($this->request->is('post')) {
+    //         $email = $this->request->getPost('email');
+    //         $motDePasse = $this->request->getPost('mot_de_passe');
+
+    //         $db = \Config\Database::connect();
+
+    //         $user = $db->query("SELECT * FROM utilisateurs WHERE email = '$email'")->getRowArray(); //
+
+    //         if ($user) {
+    //             session()->set([
+    //                 'user_id' => $user['id'],
+    //                 'nom' => $user['nom'],
+    //                 'role' => $user['role'],
+    //                 'logged_in' => true,
+    //             ]);
+
+    //             return redirect()->to('/articles');
+    //         }
+
+    //         return redirect()->back()->with('error', 'Identifiants invalides.');
+    //     }
+
+    //     return view('auth/login');
+    // }
     public function login()
     {
         if ($this->request->is('post')) {
-            $email      = $this->request->getPost('email');
+            $email = $this->request->getPost('email');
             $motDePasse = $this->request->getPost('mot_de_passe');
-
-            $db = \Config\Database::connect();
-
-            $user = $db->query("SELECT * FROM utilisateurs WHERE email = '$email'")->getRowArray();
-
+            $userModel = new UserModel();
+            $user = $userModel->loggedIn($email, $motDePasse);
             if ($user) {
                 session()->set([
-                    'user_id'   => $user['id'],
-                    'nom'       => $user['nom'],
-                    'role'      => $user['role'],
+                    'user_id' => $user['id'],
+                    'nom' => $user['nom'],
+                    'role' => $user['role'],
                     'logged_in' => true,
                 ]);
-
                 return redirect()->to('/articles');
             }
-
             return redirect()->back()->with('error', 'Identifiants invalides.');
         }
-
         return view('auth/login');
     }
 
