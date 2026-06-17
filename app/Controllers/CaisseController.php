@@ -145,8 +145,7 @@ class CaisseController extends BaseController
         $ligneModel = new LigneAchatModel();
         $produitModel = new ProduitModel();
 
-        // Créer l'achat avec l'utilisateur
-        $id_achat = $achatModel->creerAchat($id_caisse, $id_user);  // ← PASSER id_user
+        $id_achat = $achatModel->creerAchat($id_caisse, $id_user);
 
         $total = 0;
         foreach ($panier as $item) {
@@ -170,10 +169,6 @@ class CaisseController extends BaseController
         session()->remove('panier');
         return redirect()->to('/saisie-achat')->with('success', 'Panier vidé !');
     }
-
-    // ============================================
-    // HISTORIQUE - RAJOUTER CES METHODES
-    // ============================================
     public function historique()
     {
         $id_caisse = session()->get('id_caisse');

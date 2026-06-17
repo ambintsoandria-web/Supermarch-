@@ -45,7 +45,7 @@ class AuthController extends BaseController
     {
         // Détruire la session
         session()->destroy();
-        
+
         // Rediriger vers la page de login avec message
         return redirect()->to('/')->with('success', 'Déconnexion réussie');
     }
