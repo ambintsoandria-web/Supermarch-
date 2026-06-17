@@ -125,8 +125,10 @@ class CaisseController extends BaseController
     public function validerAchat()
     {
         $id_caisse = session()->get('id_caisse');
+        $id_user = session()->get('id_user');  // ← RÉCUPÉRER L'UTILISATEUR
+
         if (!$id_caisse) {
-            return redirect()->to('/')->with('error', 'Veuillez d\'abord choisir une caisse');
+            return redirect()->to('/choix-caisse')->with('error', 'Veuillez d\'abord choisir une caisse');
         }
 
         $panier = session()->get('panier') ?? [];
@@ -139,7 +141,13 @@ class CaisseController extends BaseController
         $ligneModel = new LigneAchatModel();
         $produitModel = new ProduitModel();
 
-        $id_achat = $achatModel->creerAchat($id_caisse);
+        // Créer l'achat avec l'id_user
+        $id_achat = $achatModel->insert([
+            'id_caisse' => $id_caisse,
+            'id_user' => $id_user,  // ← AJOUTER L'UTILISATEUR
+            'total' => 0,
+            'statut' => 'cloture'
+        ]);
 
         $total = 0;
         foreach ($panier as $item) {
@@ -153,11 +161,7 @@ class CaisseController extends BaseController
             $total += $item['quantite'] * $item['prix_unitaire'];
         }
 
-        $achatModel->update($id_achat, [
-            'total' => $total,
-            'statut' => 'cloture' 
-        ]);
-
+        $achatModel->update($id_achat, ['total' => $total]);
         session()->remove('panier');
 
         return redirect()->to('/saisie-achat')->with('success', '✅ Achat validé avec succès !');
