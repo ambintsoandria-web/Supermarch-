@@ -1,0 +1,116 @@
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 500px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 28px;
+        }
+
+        .sous-titre {
+            text-align: center;
+            color: #777;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+
+        .caisse-option {
+            margin: 10px 0;
+            padding: 15px 20px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            background: #fafafa;
+        }
+
+        .caisse-option:hover {
+            border-color: #4CAF50;
+            background: #f0f8f0;
+        }
+
+        .caisse-option input[type="radio"] {
+            margin-right: 15px;
+            transform: scale(1.3);
+            cursor: pointer;
+        }
+
+        .caisse-option label {
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+            cursor: pointer;
+        }
+
+        .caissier-info {
+            color: #888;
+            font-size: 14px;
+            margin-left: 35px;
+            margin-top: 5px;
+        }
+
+        .btn-valider {
+            width: 100%;
+            padding: 14px;
+            background: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 25px;
+            transition: background 0.3s;
+        }
+
+        .btn-valider:hover {
+            background: #45a049;
+        }
+
+        .btn-valider:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+
+        .error {
+            color: #d32f2f;
+            text-align: center;
+            margin-bottom: 15px;
+            padding: 10px;
+            background: #ffebee;
+            border-radius: 5px;
+            border-left: 4px solid #d32f2f;
+        }
+
+        .aucune-caisse {
+            text-align: center;
+            color: #999;
+            padding: 30px 0;
+        }
+
+        .aucune-caisse .icon {
+            font-size: 50px;
+            margin-bottom: 10px;
+        }
