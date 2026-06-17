@@ -7,6 +7,70 @@
     <link rel="stylesheet" href="/assets/css/sidebar.css">
     <link rel="stylesheet" href="/assets/css/saisie_achat.css">
     <title>Saisie des Achats</title>
+    <style>
+        .btn-valider-achat {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s;
+            margin-top: 20px;
+            width: 100%;
+        }
+
+        .btn-valider-achat:hover {
+            background: #45a049;
+        }
+
+        .btn-valider-achat:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+
+        .actions {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .btn-vider {
+            background: #f44336;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .btn-vider:hover {
+            background: #d32f2f;
+        }
+
+        .success {
+            background: #d4edda;
+            color: #155724;
+            padding: 10px 15px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            border-left: 4px solid #28a745;
+        }
+
+        .error {
+            background: #f8d7da;
+            color: #721c24;
+            padding: 10px 15px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            border-left: 4px solid #dc3545;
+        }
+    </style>
 </head>
 
 <body>
@@ -18,6 +82,14 @@
     <div class="main-content">
 
         <div class="container">
+
+            <!-- Messages -->
+            <?php if (session()->getFlashdata('success')): ?>
+                <div class="success">✅ <?= session()->getFlashdata('success') ?></div>
+            <?php endif; ?>
+            <?php if (session()->getFlashdata('error')): ?>
+                <div class="error">❌ <?= session()->getFlashdata('error') ?></div>
+            <?php endif; ?>
 
             <!-- En-tête avec la caisse -->
             <div class="header">
@@ -33,15 +105,6 @@
                 <div>
                     <a href="/" class="btn-changer">⬅ Changer de caisse</a>
                 </div>
-            </div>
-
-            <!-- Menu -->
-            <div class="menu">
-                <ul>
-                    <li><a href="#" class="active">🛒 Saisie des achats</a></li>
-                    <li><a href="#">📋 Historique</a></li>
-                    <li><a href="#">📊 Statistiques</a></li>
-                </ul>
             </div>
 
             <!-- Formulaire d'ajout -->
@@ -81,7 +144,7 @@
             <div class="table-section">
                 <h2>🛒 Panier en cours</h2>
 
-                <?php if (!empty($lignes) && count($lignes) > 0): ?>
+                <?php if (!empty($panier) && count($panier) > 0): ?>
                     <table>
                         <thead>
                             <tr>
@@ -95,23 +158,23 @@
                         <tbody>
                             <?php
                             $total = 0;
-                            foreach ($lignes as $ligne):
-                                $sous_total = $ligne->quantite * $ligne->prix_unitaire;
+                            foreach ($panier as $index => $item):
+                                $sous_total = $item['quantite'] * $item['prix_unitaire'];
                                 $total += $sous_total;
-                                ?>
+                            ?>
                                 <tr>
-                                    <td><?= $ligne->designation ?></td>
+                                    <td><?= $item['designation'] ?></td>
                                     <td class="text-right">
-                                        <?= number_format($ligne->prix_unitaire, 0, ',', ' ') ?> FCFA
+                                        <?= number_format($item['prix_unitaire'], 0, ',', ' ') ?> AR
                                     </td>
-                                    <td class="text-center"><?= $ligne->quantite ?></td>
+                                    <td class="text-center"><?= $item['quantite'] ?></td>
                                     <td class="text-right">
-                                        <?= number_format($sous_total, 0, ',', ' ') ?> FCFA
+                                        <?= number_format($sous_total, 0, ',', ' ') ?> AR
                                     </td>
                                     <td class="text-center">
                                         <form action="/supprimer-ligne" method="post" style="display:inline;">
                                             <?= csrf_field() ?>
-                                            <input type="hidden" name="id_ligne" value="<?= $ligne->id_ligne ?>">
+                                            <input type="hidden" name="index" value="<?= $index ?>">
                                             <button type="submit" class="btn-supprimer"
                                                 onclick="return confirm('Supprimer cette ligne ?')">✕</button>
                                         </form>
@@ -125,9 +188,25 @@
                         <div class="total-box">
                             <div class="label">TOTAL</div>
                             <div class="amount">
-                                <?= number_format($total, 0, ',', ' ') ?> FCFA
+                                <?= number_format($total, 0, ',', ' ') ?> AR
                             </div>
                         </div>
+                    </div>
+
+                    <!-- Boutons Valider et Vider -->
+                    <div class="actions">
+                        <form action="/valider-achat" method="post" style="flex:1;">
+                            <?= csrf_field() ?>
+                            <button type="submit" class="btn-valider-achat">
+                                ✅ Valider l'achat
+                            </button>
+                        </form>
+                        <form action="/vider-panier" method="post">
+                            <?= csrf_field() ?>
+                            <button type="submit" class="btn-vider" onclick="return confirm('Vider le panier ?')">
+                                🗑️ Vider
+                            </button>
+                        </form>
                     </div>
 
                 <?php else: ?>
@@ -144,5 +223,4 @@
     </div>
 
 </body>
-
 </html>
